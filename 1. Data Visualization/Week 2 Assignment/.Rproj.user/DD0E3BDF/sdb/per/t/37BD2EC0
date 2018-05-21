@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\nlibrary(ggthemes)\nlibrary(scales)\n\ndf <- read.csv('SH.Ts+dSST.csv', skip = 1) %>% \n  select(-c(J.D, D.N, DJF, MAM, JJA, SON)) %>% \n  gather(Month, Deviation, -Year) %>% \n  mutate(Deviation = as.numeric(Deviation),\n         Month = factor(Month, c(\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \n                                 \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"))) %>% \n  filter(complete.cases(.))\n\ndf %>% \n  ggplot(aes(x = Year, y = Deviation, colour = Month, group = Month)) +\n  geom_line() + geom_point()\n\ndf %>% filter(Year %in% seq(1880, 2017, 10)) %>% \n  mutate(Year = factor(Year)) %>% \n  ggplot(aes(x = Month, y = Deviation, colour = Year, group = Year)) +\n  geom_line() + geom_point() +\n  scale_color_grey() +\n  theme_tufte() +\n  ggtitle('World Temperature Accross the Years (Deviation)')\n  \nggsave('assignment.png', scale = 1.5)\n",
+    "created" : 1501203153604.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2480550076",
+    "id" : "37BD2EC0",
+    "lastKnownWriteTime" : 1502846181,
+    "last_content_update" : 1502846181010,
+    "path" : "~/Coursera/Data Mining Specialization/1. Data Visualization/Week 2 Assignment/make_viz.R",
+    "project_path" : "make_viz.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(igraph)\n\nfname <- 'lesmis.gml'\n\ng <- read.graph(fname, format=c(\"gml\"))\n\nselected_vertex <- vertex_attr(g)$label %in% c('Valjean', 'Cosette', 'Javert', 'Fantine', 'Pontmercy', \n                            'Myriel', 'Thenardier', 'Eponine', 'Gillenormand', \n                            'Gavroche', 'Enjolras', 'Fauchelevent', 'Gervais',\n                            'Champmathieu', 'Mabeuf', 'MmePontmercy', 'Tholomyes',\n                            'Azelma')\ng2 <- igraph::induced_subgraph(g, selected_vertex)\nV(g2)$vertex_degree <- 4*degree(g2)\n\nset.seed(1492) \n\nl <- layout.fruchterman.reingold(g2, niter=5000, area=vcount(g2)^4*10)\n\npng('lesmiserables_network.png')\n\nplot(g2, \n     layout = l,\n     vertex.size = V(g2)$vertex_degree,\n     main = 'Les Miserables Main Character Connections', vertex.label.cex = 0.8,\n     edge.arrow.size=0.5, \n     vertex.label.cex=0.75, \n     vertex.label.family=\"Helvetica\",\n     vertex.label.font=2,\n     vertex.shape=\"circle\", \n     vertex.label.color=\"black\", \n     edge.width=0.5\n)\ndev.off()\n",
+    "created" : 1502896689733.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "912491081",
+    "id" : "416F174C",
+    "lastKnownWriteTime" : 1502903247,
+    "last_content_update" : 1502903247078,
+    "path" : "~/Coursera/Data Mining Specialization/1. Data Visualization/Week 3 Assignment/week3viz.R",
+    "project_path" : "week3viz.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
